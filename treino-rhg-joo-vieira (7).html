@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ficha RHG — João Vieira</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Barlow+Condensed:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#0b0c0e; --s1:#111215; --s2:#18191d; --b1:rgba(255,255,255,.06); --b2:rgba(255,255,255,.12);
+    --text:#f3f3f4; --t2:#b5b5bc; --t3:#70707a; --acc:#e8f542; --adim:rgba(232,245,66,.08);
+    --a:#0f172a; --b:#052e16; --c:#1a0533; --d:#2a1406; --e:#1a0c0c; --f:#0c1a0c;
+    --fd:'Barlow Condensed',sans-serif; --fs:'Barlow',sans-serif; --fm:'JetBrains Mono',monospace;
+    --r:10px; --r2:14px; --r3:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--fs);font-size:15px;line-height:1.45}
+  .header{position:sticky;top:0;z-index:10;background:#0d0e12;border-bottom:2px solid var(--acc);padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+  .logo{font-family:var(--fd);font-size:18px;font-weight:800;letter-spacing:.05em}
+  .logo span:last-child{color:var(--acc)}
+  .subhead{font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.12em;text-transform:uppercase;text-align:right}
+  .nav{position:sticky;top:48px;z-index:9;display:flex;gap:2px;overflow:auto;background:var(--s1);border-bottom:1px solid var(--b1);padding:0 6px}
+  .nav button{background:none;border:0;color:var(--t3);padding:12px 14px;font:700 13px var(--fd);letter-spacing:.06em;text-transform:uppercase;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+  .nav button.active{color:var(--text);border-color:var(--acc)}
+  .main{max-width:780px;margin:0 auto;padding:18px 14px 96px}
+  .section{display:none}.section.active{display:block}
+  .hero,.card,.exercise,.note,.stats,.tech,.meso{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r2)}
+  .hero{padding:24px 20px;margin-bottom:14px}
+  .eyebrow{font-family:var(--fm);font-size:10px;letter-spacing:.18em;color:var(--acc);text-transform:uppercase;margin-bottom:10px}
+  .title{font-family:var(--fd);font-size:38px;font-weight:800;line-height:1;margin-bottom:6px}
+  .subtitle{font-size:14px;color:var(--t2);font-style:italic;margin-bottom:16px}
+  .tags,.weekrow,.statsrow{display:flex;gap:8px;flex-wrap:wrap}
+  .tag{font-family:var(--fm);font-size:10px;letter-spacing:.08em;padding:4px 10px;border-radius:999px;border:1px solid var(--b2);color:var(--t2)}
+  .week{flex:1 1 160px;padding:14px 12px;border-radius:var(--r2);cursor:pointer;border:1px solid var(--b1);text-align:left}
+  .week.a{background:var(--a)}.week.b{background:var(--b)}.week.c{background:var(--c)}.week.d{background:var(--d)}.week.e{background:var(--e)}.week.f{background:var(--f)}
+  .wk1{font-family:var(--fm);font-size:10px;letter-spacing:.14em;color:var(--t2);margin-bottom:4px}
+  .wk2{font-family:var(--fd);font-size:22px;font-weight:700}
+  .wk3{font-size:11px;color:var(--t2);margin-top:4px;line-height:1.45}
+  .note{padding:12px 14px;background:var(--adim);border-color:rgba(232,245,66,.16);font-size:12px;color:var(--t2);line-height:1.65}
+  .sectionhead{border-radius:var(--r2);padding:20px 18px 16px;margin-bottom:12px;position:relative;overflow:hidden}
+  .sectionhead::after{content:attr(data-id);position:absolute;right:-8px;top:-12px;font-family:var(--fd);font-size:100px;font-weight:900;opacity:.05}
+  .sa{background:var(--a);border:1px solid rgba(96,165,250,.22)}.sb{background:var(--b);border:1px solid rgba(74,222,128,.22)}.sc{background:var(--c);border:1px solid rgba(192,132,252,.22)}.sd{background:var(--d);border:1px solid rgba(251,146,60,.22)}.se{background:var(--e);border:1px solid rgba(244,63,94,.22)}.sf{background:var(--f);border:1px solid rgba(74,222,128,.22)}
+  .shey{font-family:var(--fm);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+  .sht{font-family:var(--fd);font-size:28px;font-weight:800;line-height:1.05;margin-bottom:6px}
+  .shr{font-size:12px;color:var(--t2)}
+  .sessionnote{background:var(--s2);border:1px solid var(--b1);border-left:3px solid var(--acc);border-radius:0 var(--r) var(--r) 0;padding:12px 14px;margin-bottom:14px;font-size:13px;color:var(--t2);line-height:1.65}
+  .sessionnote p+p{margin-top:8px}
+  .vol-badge{display:inline-flex;align-items:center;gap:5px;background:var(--adim);border:1px solid rgba(232,245,66,.2);border-radius:999px;padding:3px 10px;font-family:var(--fm);font-size:10px;color:var(--acc);margin-top:8px}
+  .elist{display:flex;flex-direction:column;gap:10px}
+  .exercise{overflow:hidden}
+  .ehead{display:flex;align-items:center;gap:10px;padding:13px 14px 0}
+  .enum{font-family:var(--fm);font-size:11px;color:var(--t3);min-width:20px}
+  .ename{font-size:15px;font-weight:600;line-height:1.35;flex:1}
+  .pill{font-family:var(--fm);font-size:9px;letter-spacing:.08em;padding:3px 8px;border-radius:999px;text-transform:uppercase}
+  .cv{background:rgba(255,255,255,.08);color:#c7c7cd}.bo{background:rgba(34,197,94,.18);color:#86efac}.cluster{background:rgba(96,165,250,.18);color:#93c5fd}.mr{background:rgba(168,85,247,.18);color:#c4b5fd}.rp{background:rgba(244,63,94,.18);color:#fda4af}.myoreps{background:rgba(232,245,66,.18);color:#e8f542}
+  .tech-mul{font-family:var(--fm);font-size:9px;color:var(--acc);background:rgba(232,245,66,.08);border:1px solid rgba(232,245,66,.18);padding:2px 6px;border-radius:5px}
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:10px 14px 0;background:var(--b1);border-radius:var(--r);overflow:hidden}
+  .metric{background:var(--s2);padding:8px 10px}
+  .ml{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+  .mv{font-family:var(--fm);font-size:12px;color:var(--text);line-height:1.35}
+  .how{margin:10px 14px 0;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 11px}
+  .howt{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:5px}
+  .howb{font-size:12px;color:var(--t2);line-height:1.55}
+  .obs{padding:10px 14px 0;font-size:12px;color:var(--t2);line-height:1.6;font-style:italic}
+  .compareup{color:#86efac;font-weight:700}.comparedown{color:#fda4af;font-weight:700}.compareeq{color:#fde68a;font-weight:700}
+  .log{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:12px 14px 14px}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .wide{grid-column:1/-1}
+  label{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
+  input,textarea,select{width:100%;background:var(--s2);color:var(--text);border:1px solid var(--b1);border-radius:10px;padding:10px 11px;font:500 14px var(--fs);outline:none}
+  input:focus,textarea:focus{border-color:rgba(232,245,66,.35);box-shadow:0 0 0 3px rgba(232,245,66,.05)}
+  textarea{min-height:82px;resize:vertical}
+  .history{border-top:1px solid var(--b1);padding:10px 14px 13px}
+  .ht{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
+  .hi{font-size:12px;color:var(--t2);line-height:1.5;padding:6px 0;border-top:1px dashed rgba(255,255,255,.06)}
+  .hi:first-child{border-top:0;padding-top:0}
+  .footer{position:fixed;left:0;right:0;bottom:0;display:flex;gap:8px;padding:10px 12px;background:linear-gradient(to top,#0b0c0e 78%,rgba(11,12,14,.72));backdrop-filter:blur(10px);border-top:1px solid var(--b1)}
+  .btn{flex:1;background:var(--s2);color:var(--text);border:1px solid var(--b1);border-radius:12px;padding:12px 10px;font:700 12px var(--fd);letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+  .btn.primary{background:var(--acc);color:#0b0c0e;border-color:transparent}
+  .stats,.tech,.meso{padding:14px}
+  .stitle{font-family:var(--fd);font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
+  .statsrow{margin-bottom:12px}
+  .stat{flex:1;padding:12px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r2)}
+  .snum{font-family:var(--fd);font-size:28px;font-weight:800;line-height:1}
+  .slab{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-top:4px}
+  .vr{display:grid;grid-template-columns:1fr auto;gap:8px;padding:7px 0;border-top:1px dashed rgba(255,255,255,.06)}
+  .vr:first-child{border-top:0;padding-top:0}
+  .vnum{font-family:var(--fm);font-size:12px;color:var(--acc)}
+  .techcard{cursor:pointer;transition:.18s}.techcard:hover{border-color:var(--b2)}
+  .techmore{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed rgba(255,255,255,.08)}
+  .techcard.open .techmore{display:block}
+  .techtip{font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin-top:10px}
+  .techname{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:700;font-size:14px;margin-bottom:8px}
+  .techdesc{font-size:13px;color:var(--t2);line-height:1.65}
+  .checkrow{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:10px 11px;min-height:44px}
+  .checkrow input[type="checkbox"]{width:18px;height:18px;accent-color:#e8f542;cursor:pointer}
+  .checklabel{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--t2)}
+  .setsgrid{display:flex;flex-direction:column;gap:10px;padding:12px 14px 0}
+  .setcard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px}
+  .setcard.done{border-color:rgba(134,239,172,.22);background:rgba(134,239,172,.04)}
+  .sethead{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:8px}
+  .setfields{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .setcompare{margin-top:8px;font-size:11px;line-height:1.5;color:var(--t2)}
+  .setcheck{display:flex;align-items:center;gap:8px;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(255,255,255,.08)}
+  .setcheck input[type="checkbox"]{width:16px;height:16px;accent-color:#e8f542;cursor:pointer}
+  .setcheck span{font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--t2)}
+  .exercise.comp-up{border-color:rgba(134,239,172,.35)}.exercise.comp-down{border-color:rgba(253,164,175,.35)}.exercise.comp-eq{border-color:rgba(253,230,138,.35)}
+  .finishwrap{margin-top:18px}
+  .finishbtn{width:100%;padding:16px;border-radius:14px;border:1px solid rgba(232,245,66,.30);background:linear-gradient(180deg,rgba(232,245,66,.18),rgba(232,245,66,.08));color:var(--text);font-family:var(--fd);font-size:15px;font-weight:800;cursor:pointer}
+  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:76px;background:#101114;border:1px solid var(--b2);color:var(--text);padding:10px 12px;border-radius:999px;font-size:12px;opacity:0;pointer-events:none;transition:.2s}
+  .toast.show{opacity:1}
+  .timerbox{margin:12px 0 14px;padding:14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+  .timerhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+  .timerlabel{font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+  .timervalue{font-family:var(--fd);font-size:36px;font-weight:800;line-height:1;color:var(--text)}
+  .timerhint{font-size:12px;color:var(--t2);line-height:1.45;margin-top:8px}
+  .timeractions{display:flex;gap:8px;flex-wrap:wrap}
+  .timerbtn{background:var(--s2);color:var(--text);border:1px solid var(--b1);border-radius:12px;padding:10px 12px;font:700 12px var(--fd);letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+  .timerbtn.primary{background:var(--acc);color:#0b0c0e;border-color:transparent}
+  .timerstatus{font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.08em;text-transform:uppercase}
+  .finish-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(11,12,14,.82);backdrop-filter:blur(8px);z-index:9999;opacity:0;pointer-events:none;transition:opacity .28s ease}
+  .finish-overlay.show{opacity:1;pointer-events:all}
+  .finish-card{background:var(--s1);border:1px solid var(--b1);border-radius:22px;padding:32px;text-align:center;max-width:300px}
+  .finish-check{font-size:3rem;margin-bottom:12px;animation:finishPulse .5s ease both}
+  .finish-title{font-family:var(--fd);font-size:1.2rem;font-weight:900;color:#f3f4f6;margin-bottom:6px}
+  .finish-sub{font-size:.92rem;color:#a1a1aa}
+  @keyframes finishPulse{0%{transform:scale(.7);opacity:0}60%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
+  @media(max-width:600px){.title{font-size:34px}.metrics,.log,.setfields{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="logo">TEAM <span>RHG</span></div>
+  <div class="subhead">ficha offline<br/>consultoria premium</div>
+</header>
+<nav class="nav" id="nav"></nav>
+<main class="main">
+  <section class="section active" id="inicio"></section>
+  <section class="section" id="sess0"></section>
+<section class="section" id="sess1"></section>
+<section class="section" id="sess2"></section>
+  <section class="section" id="coach"></section>
+  <section class="section" id="tecnicas"></section>
+  <section class="section" id="historico"></section>
+</main>
+<div class="footer">
+  <button class="btn" id="reportBtn">Copiar resumo</button>
+</div>
+<div class="toast" id="toast"></div>
+<div class="finish-overlay" id="finishOverlay">
+  <div class="finish-card">
+    <div class="finish-check">✓</div>
+    <div class="finish-title">Sessão concluída</div>
+    <div class="finish-sub">Salvando e voltando para o início...</div>
+  </div>
+</div>
+<script>
+  const STORAGE_KEY = "rhg_joão_vieira_v3";
+  const APP = { athlete:"João Vieira", plan:"Fullbody 3x", week:"Periodização Linear", logs:{}, timers:{} };
+
+  // Valores pré-renderizados pelo gerador (evita interpolações dentro da string JS)
+  const _ATHLETE = "João Vieira";
+  const _SUBTITLE = "Hipetrofia · Intermediário · Fullbody 3x";
+  const _TAGS = "<span class=\"tag\">Offline</span><span class=\"tag\">Resumo para WhatsApp</span><span class=\"tag\">Progressão linear</span><span class=\"tag\">Técnicas avançadas</span>";
+  const _WEEKROW = "<button class=\"week d\" data-open=\"sess0\"><div class=\"wk1\">DIA 1</div><div class=\"wk2\">FULLBODY 1</div><div class=\"wk3\">Estímulo Geral</div></button>\n          <button class=\"week c\" data-open=\"sess1\"><div class=\"wk1\">DIA 2</div><div class=\"wk2\">FULLBODY 2</div><div class=\"wk3\">Estímulo Geral</div></button>\n          <button class=\"week a\" data-open=\"sess2\"><div class=\"wk1\">DIA 3</div><div class=\"wk2\">FULLBODY 3</div><div class=\"wk3\">Estímulo Geral</div></button>";
+  const _NOTE = "Estímulos gerais de forma que o volume e a frequência se mantenham alinhados.\nApós concluir a semana, enviar o resumo para o treinador.";
+
+  const VOL_AUTO = [['Outros','18.0 séries equiv.'],
+      ['Quadríceps','8.0 séries equiv.'],
+      ['Tríceps','7.0 séries equiv.'],
+      ['Glúteo','3.0 séries equiv.'],
+      ['Bíceps','3.0 séries equiv.'],
+      ['Deltoide Medial','3.0 séries equiv.'],
+      ['Isquiotibiais','2.0 séries equiv.'],
+      ['Dorsal','2.0 séries equiv.'],
+      ['Deltoide','2.0 séries equiv.'],
+      ['Dorsal (Espessura)','2.0 séries equiv.'],
+      ['Peitoral','2.0 séries equiv.'],
+      ['Deltoide Anterior','2.0 séries equiv.'],
+      ['Peitoral Superior','2.0 séries equiv.'],
+      ['Braquial','1.5 séries equiv.'],
+      ['Trapézio','1.0 séries equiv.']];
+  const VOL_MANUAL = [['Deltóides','9 séries diretas + indiretas'],
+      ['Bíceps','8 séries diretas'],
+      ['Quadríceps','8 séries diretas'],
+      ['Posteriores','6 séries diretas'],
+      ['Glúteos','8 séries diretas'],
+      ['Triceps','9 séries diretas'],
+      ['Lombar','4 séries diretas + indiretas'],
+      ['Costas','6 séries diretas'],
+      ['Peito','6 séries diretas']];
+
+  const SESSIONS = {
+  "sess0": {
+    "tab": "Fullbody 1",
+    "id": "FU",
+    "cls": "sd",
+    "eyebrow": "Dia 01 - FB A",
+    "title": "Fullbody 1",
+    "summary": "Estímulo Geral",
+    "note": [
+      "Manter qualidade de execução em todas as séries e progressão semanal.",
+      ""
+    ],
+    "exercises": [
+      {
+        "key": "sess0_stiff",
+        "name": "Stiff",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão de quadril com pouca flexão de joelho, enfatizando cadeia posterior."
+      },
+      {
+        "key": "sess0_puxada_aberta",
+        "name": "Puxada Aberta",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Adução/extensão do ombro com depressão escapular, focando dorsais."
+      },
+      {
+        "key": "sess0_desenvolvimento",
+        "name": "Desenvolvimento",
+        "sets": "2 válidas",
+        "reps": "6-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Flexão/abdução do ombro com extensão de cotovelo, predominando deltoide anterior."
+      },
+      {
+        "key": "sess0_leg_press",
+        "name": "Leg Press",
+        "sets": "2 válidas",
+        "reps": "4-7 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão de joelho com contribuição de extensão de quadril, focando quadríceps e glúteos."
+      },
+      {
+        "key": "sess0_voador_fly",
+        "name": "Voador (Fly)",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Adução horizontal do ombro, isolando peitoral."
+      },
+      {
+        "key": "sess0_rosca_scott",
+        "name": "Rosca Scott",
+        "sets": "2 válidas",
+        "reps": "6-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Flexão de cotovelo com ombro estabilizado, enfatizando bíceps."
+      },
+      {
+        "key": "sess0_cadeira_extensora",
+        "name": "Cadeira Extensora",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão de joelho isolada, focando quadríceps."
+      },
+      {
+        "key": "sess0_trceps_testa",
+        "name": "Tríceps Testa",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão de cotovelo com ombro fixo, enfatizando tríceps.\n\nObs: Fazer com barra"
+      }
+    ]
+  },
+  "sess1": {
+    "tab": "Fullbody 2",
+    "id": "FU",
+    "cls": "sc",
+    "eyebrow": "Dia 02 - FB B",
+    "title": "Fullbody 2",
+    "summary": "Estímulo Geral",
+    "note": [
+      "Manter qualidade de execução em todas as séries e progressão semanal.",
+      ""
+    ],
+    "exercises": [
+      {
+        "key": "sess1_agachamento_hack",
+        "name": "Agachamento Hack",
+        "sets": "2 válidas",
+        "reps": "5-7 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão de joelho dominante com suporte de quadril, enfatizando quadríceps."
+      },
+      {
+        "key": "sess1_remada_baixa",
+        "name": "Remada Baixa",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão do ombro com retração escapular, focando dorsais e romboides."
+      },
+      {
+        "key": "sess1_supino_reto",
+        "name": "Supino Reto",
+        "sets": "2 válidas",
+        "reps": "5-7 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Adução horizontal do ombro com extensão de cotovelo, focando peitoral."
+      },
+      {
+        "key": "sess1_elevao_lateral",
+        "name": "Elevação Lateral",
+        "sets": "3 válidas",
+        "reps": "7-9 reps",
+        "rir": "RIR 2-1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Abdução do ombro no plano frontal, enfatizando deltoide lateral."
+      },
+      {
+        "key": "sess1_rosca_inclinada_no_b",
+        "name": "Rosca Inclinada no Banco",
+        "sets": "2 válidas",
+        "reps": "6-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Flexão de cotovelo com ombro em extensão, aumentando alongamento do bíceps."
+      },
+      {
+        "key": "sess1_trceps_pulley",
+        "name": "Tríceps pulley",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão de cotovelo com tensão contínua, focando tríceps."
+      },
+      {
+        "key": "sess1_cadeira_flexora",
+        "name": "Cadeira Flexora",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Flexão de joelho isolada, enfatizando isquiotibiais."
+      },
+      {
+        "key": "sess1_rosca_martelo",
+        "name": "Rosca Martelo",
+        "sets": "1 válidas",
+        "reps": "6-9 reps",
+        "rir": "RIR 0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Flexão de cotovelo com pegada neutra, enfatizando braquial e braquiorradial."
+      }
+    ]
+  },
+  "sess2": {
+    "tab": "Fullbody 3",
+    "id": "FU",
+    "cls": "sa",
+    "eyebrow": "Dia 03 - FB C",
+    "title": "Fullbody 3",
+    "summary": "Estímulo Geral",
+    "note": [
+      "Manter qualidade de execução em todas as séries e progressão semanal.",
+      ""
+    ],
+    "exercises": [
+      {
+        "key": "sess2_remada_chalter_no_ba",
+        "name": "Remada c/halter no banco",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão do ombro com retração escapular unilateral, focando dorsais."
+      },
+      {
+        "key": "sess2_supino_inclinado",
+        "name": "Supino Inclinado",
+        "sets": "2 válidas",
+        "reps": "5-7 reps",
+        "rir": "RIR 2–3",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Adução horizontal do ombro em ângulo inclinado, enfatizando peitoral superior.\n\nObs: Fazer com halteres."
+      },
+      {
+        "key": "sess2_elevao_plvica",
+        "name": "Elevação Pélvica",
+        "sets": "2 válidas",
+        "reps": "6-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão de quadril com pico de contração, focando glúteos.\n\nObs: Fazer na máquina, caso não tenha ou note desconforto -> fazer com barra livre."
+      },
+      {
+        "key": "sess2_voador_invertido",
+        "name": "Voador invertido",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Abdução do ombro controlada, focando deltoide lateral."
+      },
+      {
+        "key": "sess2_cadeira_extensora",
+        "name": "Cadeira Extensora",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão de joelho isolada, focando quadríceps."
+      },
+      {
+        "key": "sess2_trceps_francs",
+        "name": "Tríceps Francês",
+        "sets": "2 válidas",
+        "reps": "5-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão de cotovelo com ombro em flexão, enfatizando cabeça longa do tríceps."
+      },
+      {
+        "key": "sess2_extenso_de_lombar",
+        "name": "Extensão de lombar",
+        "sets": "2 válidas",
+        "reps": "6-9 reps",
+        "rir": "RIR 1-0",
+        "tech": "Convencional",
+        "how": "",
+        "obs": "Extensão da coluna com ação dos eretores da espinha e glúteos."
+      }
+    ]
+  }
+};
+
+  const PESO_TECNICA = {'Convencional':1.0,'Back-Off Set':1.1,'Cluster Set':1.2,'Rest-Pause':1.5,'Myo-Reps':1.8,'Muscle Round':2.0};
+
+  const TECHS = [
+    {name:'Convencional',cls:'cv',mul:'×1.0',desc:'Série normal. Faz as reps pedidas com boa forma e melhora progressivamente.',more:'Foco é controlar a execução, repetir o padrão mecânico e progredir sem pressa. Se bater o topo da faixa de reps com boa técnica, sobe a carga.'},
+    {name:'Back-Off Set',cls:'bo',mul:'×1.1',desc:'Após séries pesadas, reduz a carga e faz mais uma série para somar volume.',more:'Aproveita que o músculo foi ativado nas séries principais e adiciona mais trabalho útil sem transformar tudo em série pesada.'},
+    {name:'Cluster Set',cls:'cluster',mul:'×1.2',desc:'Divide a série em micro-blocos com pausa curta entre eles.',more:'Permite manter qualidade de execução por mais repetições. Ideal para exercícios compostos com foco em força.'},
+    {name:'Rest-Pause',cls:'rp',mul:'×1.5',desc:'Faz a série, descansa poucos segundos e continua para extrair mais estímulo.',more:'Técnica para o fim da série. Só faz sentido quando o exercício é seguro e o padrão continua firme.'},
+    {name:'Myo-Reps',cls:'myoreps',mul:'×1.8',desc:'Uma série de ativação pesada + várias mini-séries curtas com pausa breve.',more:'Alto estímulo muscular em pouco tempo. Muito eficiente para hipertrofia. Volume equivalente é bem maior que aparenta.'},
+    {name:'Muscle Round',cls:'mr',mul:'×2.0',desc:'Blocos de 6 reps com 10 segundos de pausa, repetidos várias vezes.',more:'Gera muito tempo sob tensão. Excelente em máquinas e exercícios estáveis. Volume ponderado é o maior de todas as técnicas.'}
+  ];
+
+  function techCls(t){ if(t==='Back-Off Set') return 'bo'; if(t==='Muscle Round') return 'mr'; if(t==='Rest-Pause') return 'rp'; if(t==='Myo-Reps') return 'myoreps'; if(t==='Cluster Set') return 'cluster'; return 'cv'; }
+  function getLog(s,e){ APP.logs[s]||={}; APP.logs[s][e]||={load:'',reps:'',rir:'',effort:'',notes:'',done:false,history:[],set1_load:'',set1_reps:'',set1_rir:'',set1_done:false,set2_load:'',set2_reps:'',set2_rir:'',set2_done:false,set3_load:'',set3_reps:'',set3_rir:'',set3_done:false,set4_load:'',set4_reps:'',set4_rir:'',set4_done:false}; return APP.logs[s][e]; }
+  function saveState(silent=false){ localStorage.setItem(STORAGE_KEY,JSON.stringify(APP)); if(!silent) showToast('Salvo no aparelho.'); }
+  function loadState(){ const raw=localStorage.getItem(STORAGE_KEY); if(raw){try{const p=JSON.parse(raw); APP.logs=p.logs||{}; APP.timers=p.timers||{};}catch(e){}} }
+  function showToast(msg){ const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show'); clearTimeout(window._tt); window._tt=setTimeout(()=>el.classList.remove('show'),1800); }
+  function formatKg(v){ return String(v).replace('.',','); }
+  function parseLoad(v){ if(!v&&v!==0) return null; const c=String(v).replace(',','.').replace(/[^0-9.\-]/g,'').trim(); if(!c) return null; const n=Number(c); return Number.isFinite(n)?n:null; }
+  function setCountFromExercise(ex){ const m=String(ex.sets||'').match(/(\d+)/); const n=m?Number(m[1]):1; return Math.max(1,Math.min(n,4)); }
+  function ensureLegacySets(log){ if(!log.set1_load&&log.load) log.set1_load=log.load; if(!log.set1_reps&&log.reps) log.set1_reps=log.reps; if(!log.set1_rir&&log.rir) log.set1_rir=log.rir; }
+  function bestSetLoad(log,setCount){ const vals=[]; for(let i=1;i<=setCount;i++){const v=parseLoad(log['set'+i+'_load']); if(v!==null) vals.push(v);} if(!vals.length){const l=parseLoad(log.load); return l===null?'':formatKg(l);} return formatKg(Math.max(...vals)); }
+  function totalPerformedReps(log,setCount){ let total=0,has=false; for(let i=1;i<=setCount;i++){const v=Number(String(log['set'+i+'_reps']||'').replace(',','.')); if(Number.isFinite(v)&&v>0){total+=v;has=true;}} if(has) return String(total); return log.reps||''; }
+  function averagePerformedRir(log,setCount){ const vals=[]; for(let i=1;i<=setCount;i++){const v=Number(String(log['set'+i+'_rir']||'').replace(',','.')); if(Number.isFinite(v)) vals.push(v);} if(vals.length) return (Math.round((vals.reduce((a,b)=>a+b,0)/vals.length)*10)/10).toString().replace('.',','); return log.rir||''; }
+  function areAllSetsChecked(log,setCount){ for(let i=1;i<=setCount;i++){if(!log['set'+i+'_done']) return false;} return setCount>0; }
+  function currentLoadValue(ex,log){ return bestSetLoad(log,setCountFromExercise(ex)); }
+  function currentSnapshot(ex,log){ const sc=setCountFromExercise(ex); return {load:currentLoadValue(ex,log),reps:totalPerformedReps(log,sc),rir:averagePerformedRir(log,sc),effort:log.effort||'',notes:log.notes||'',set1_load:log.set1_load||'',set1_reps:log.set1_reps||'',set1_rir:log.set1_rir||'',set2_load:log.set2_load||'',set2_reps:log.set2_reps||'',set2_rir:log.set2_rir||'',set3_load:log.set3_load||'',set3_reps:log.set3_reps||'',set3_rir:log.set3_rir||'',set4_load:log.set4_load||'',set4_reps:log.set4_reps||'',set4_rir:log.set4_rir||''}; }
+  function sameEntry(a,b){ if(!a||!b) return false; const keys=['load','reps','rir','effort','notes','set1_load','set1_reps','set1_rir','set2_load','set2_reps','set2_rir','set3_load','set3_reps','set3_rir','set4_load','set4_reps','set4_rir']; return keys.every(k=>String(a[k]||'')===String(b[k]||'')); }
+  function referenceEntry(ex,log){ const h=log.history||[]; if(!h.length) return null; const snap=currentSnapshot(ex,log); const last=h[0]; if(sameEntry(snap,last)) return h[1]||null; return last; }
+  function compareInfo(cur,prev){ if(!prev) return {text:'Sem treino anterior salvo para comparar.',cls:''}; const parts=[]; let cls=''; const cl=parseLoad(cur?.load),pl=parseLoad(prev?.load); if(cl!==null&&pl!==null){const d=+(cl-pl).toFixed(2); if(d>0){parts.push('Carga: +'+String(d).replace('.',',')+' kg');cls='compareup';}else if(d<0){parts.push('Carga: '+String(d).replace('.',',')+' kg');cls='comparedown';}else{parts.push('Carga igual');cls=cls||'compareeq';}} if(!parts.length) return {text:'Preencha os dados de hoje para comparar.',cls:''}; return {text:parts.join(' · '),cls:cls||'compareeq'}; }
+  function compCls(c){ if(!c||!c.cls) return ''; if(c.cls==='compareup') return 'comp-up'; if(c.cls==='comparedown') return 'comp-down'; if(c.cls==='compareeq') return 'comp-eq'; return ''; }
+  function compareSetInfo(cs,ps){ if(!ps) return {text:'Sem série anterior salva.',cls:''}; const parts=[]; let cls=''; const cl=parseLoad(cs.load),pl=parseLoad(ps.load); if(cl!==null&&pl!==null){const d=+(cl-pl).toFixed(2); if(d>0){parts.push('Carga +'+String(d).replace('.',',')+' kg');cls='compareup';}else if(d<0){parts.push('Carga '+String(d).replace('.',',')+' kg');cls='comparedown';}else{parts.push('Carga igual');cls='compareeq';}} return {text:parts.length?parts.join(' · '):'Preencha para comparar.',cls}; }
+  function lastLoadLabel(ex,last){ if(!last) return 'Último treino: sem registro ainda.'; const c=setCountFromExercise(ex); const setsText=Array.from({length:c},(_,idx)=>idx+1).map(n=>(last['set'+n+'_load']||last['set'+n+'_reps']||last['set'+n+'_rir'])?'S'+n+': '+(last['set'+n+'_load']||'-')+'kg/'+(last['set'+n+'_reps']||'-')+' reps/RIR '+(last['set'+n+'_rir']||'-'):'').filter(Boolean).join(' · '); return 'Último treino: <strong>'+(last.load||'-')+' kg</strong> · '+(last.reps||'-')+' reps · RIR '+(last.rir||'-')+' · '+last.date+(setsText?'<br>'+setsText:''); }
+  function setInputsHtml(sk,ex,log){ const count=setCountFromExercise(ex); ensureLegacySets(log); const ref=referenceEntry(ex,log); let html='<div class="setsgrid">'; for(let i=1;i<=count;i++){ const prev=ref?{load:ref['set'+i+'_load'],reps:ref['set'+i+'_reps'],rir:ref['set'+i+'_rir']}:null; const cur={load:log['set'+i+'_load']||'',reps:log['set'+i+'_reps']||'',rir:log['set'+i+'_rir']||''}; const cmp=compareSetInfo(cur,prev); html+='<div class="setcard '+(log['set'+i+'_done']?'done':'')+'"><div class="sethead">Série '+i+'</div><div class="setfields"><div class="field"><label>Carga (kg)</label><input data-s="'+sk+'" data-e="'+ex.key+'" data-k="set'+i+'_load" value="'+(log['set'+i+'_load']||'')+'"></div><div class="field"><label>Reps feitas</label><input data-s="'+sk+'" data-e="'+ex.key+'" data-k="set'+i+'_reps" value="'+(log['set'+i+'_reps']||'')+'"></div><div class="field"><label>RIR real</label><input data-s="'+sk+'" data-e="'+ex.key+'" data-k="set'+i+'_rir" value="'+(log['set'+i+'_rir']||'')+'"></div></div><div class="setcompare"><span class="'+(cmp.cls||'')+'">'+(cmp.text)+'</span></div><label class="setcheck"><input type="checkbox" data-s="'+sk+'" data-e="'+ex.key+'" data-k="set'+i+'_done" '+(log['set'+i+'_done']?'checked':'')+'><span>Check-in da série</span></label></div>'; } html+='</div>'; return html; }
+  function historyHtml(h,ex){ if(!h||!h.length) return '<div class="history"><div class="ht">Histórico recente</div><div class="hi">Sem registros ainda.</div></div>'; return '<div class="history"><div class="ht">Histórico recente</div>'+h.slice(0,3).map(x=>'<div class="hi"><strong>'+x.date+'</strong><br>'+(x.load||'-')+' kg · '+(x.reps||'-')+' reps totais · RIR médio '+(x.rir||'-')+(x.notes?'<br>'+x.notes:'')+'</div>').join('')+'</div>'; }
+  function exerciseHtml(sk,ex,i){ const log=getLog(sk,ex.key); const ref=referenceEntry(ex,log); const curLoad=currentLoadValue(ex,log); const sc=setCountFromExercise(ex); const curLog={load:curLoad,reps:totalPerformedReps(log,sc),rir:averagePerformedRir(log,sc),effort:log.effort}; const cmp=compareInfo(curLog,ref); const mul=PESO_TECNICA[ex.tech]||1; return '<div class="exercise '+compCls(cmp)+'"><div class="ehead"><span class="enum">'+String(i+1).padStart(2,'0')+'</span><span class="ename">'+ex.name+'</span><span class="pill '+techCls(ex.tech)+'">'+ex.tech+'</span><span class="tech-mul">×'+mul+'</span></div><div class="metrics"><div class="metric"><div class="ml">Séries</div><div class="mv">'+ex.sets+'</div></div><div class="metric"><div class="ml">Reps</div><div class="mv">'+ex.reps+'</div></div><div class="metric"><div class="ml">RIR</div><div class="mv">'+ex.rir+'</div></div></div>'+(ex.how?'<div class="how"><div class="howt">Como fazer</div><div class="howb">'+ex.how+'</div></div>':'')+'<div class="how"><div class="howt">Comparativo com o último treino</div><div class="howb">'+lastLoadLabel(ex,ref)+'<br><span class="'+(cmp.cls||'')+'">'+cmp.text+'</span></div></div>'+(ex.obs?'<div class="obs">'+ex.obs+'</div>':'')+setInputsHtml(sk,ex,log)+'<div class="log"><div class="field"><label>Carga geral (kg)</label><input data-s="'+sk+'" data-e="'+ex.key+'" data-k="load" value="'+log.load+'"></div><div class="field"><label>Esforço (1–10)</label><input type="number" min="1" max="10" step="1" data-s="'+sk+'" data-e="'+ex.key+'" data-k="effort" value="'+log.effort+'"></div><div class="field"><label>Check-up</label><div class="checkrow"><input type="checkbox" data-s="'+sk+'" data-e="'+ex.key+'" data-k="done" '+(log.done?'checked':'')+'><span class="checklabel">Confirmar exercício</span></div></div><div class="field wide"><label>Observações</label><textarea data-s="'+sk+'" data-e="'+ex.key+'" data-k="notes">'+log.notes+'</textarea></div></div>'+historyHtml(log.history,ex)+'</div>'; }
+  function getTimer(sk){ APP.timers||={}; APP.timers[sk]||={elapsedMs:0,startedAt:null,isRunning:false,lastFinishedMs:0}; return APP.timers[sk]; }
+  function currentElapsedMs(sk){ const t=getTimer(sk); if(t.isRunning&&t.startedAt) return t.elapsedMs+Math.max(0,Date.now()-t.startedAt); return t.elapsedMs||0; }
+  function formatTimer(ms){ const s=Math.max(0,Math.floor(ms/1000)); const h=Math.floor(s/3600); const m=Math.floor((s%3600)/60); const sec=s%60; if(h>0) return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0'); return String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0'); }
+  function timerStatusText(sk){ const t=getTimer(sk); if(t.isRunning) return 'Em andamento'; if((t.elapsedMs||0)>0) return 'Pausado'; return 'Pronto para iniciar'; }
+  function renderTimerBox(sk){ return '<div class="timerbox"><div class="timerhead"><div><div class="timerlabel">Tempo da sessão</div><div class="timerstatus" id="timerStatus-'+sk+'">'+timerStatusText(sk)+'</div></div><div class="timervalue" id="timerValue-'+sk+'">'+formatTimer(currentElapsedMs(sk))+'</div></div><div class="timeractions"><button class="timerbtn primary" type="button" data-timer-start="'+sk+'">Iniciar</button><button class="timerbtn" type="button" data-timer-pause="'+sk+'">Pausar</button><button class="timerbtn" type="button" data-timer-reset="'+sk+'">Resetar</button></div><div class="timerhint">O cronômetro acompanha a sessão em tempo real.</div></div>'; }
+  function updateTimerUI(){ document.querySelectorAll('[id^="timerValue-"]').forEach(el=>{const sk=el.id.replace('timerValue-',''); el.textContent=formatTimer(currentElapsedMs(sk)); const se=document.getElementById('timerStatus-'+sk); if(se) se.textContent=timerStatusText(sk);}); }
+  function startSessionTimer(sk){ const t=getTimer(sk); if(t.isRunning) return; t.startedAt=Date.now(); t.isRunning=true; saveState(true); updateTimerUI(); }
+  function pauseSessionTimer(sk){ const t=getTimer(sk); if(!t.isRunning||!t.startedAt) return; t.elapsedMs=currentElapsedMs(sk); t.startedAt=null; t.isRunning=false; saveState(true); updateTimerUI(); }
+  function resetSessionTimer(sk){ const t=getTimer(sk); t.elapsedMs=0; t.startedAt=null; t.isRunning=false; saveState(true); updateTimerUI(); }
+  function sectionHtml(key){ const s=SESSIONS[key]; const exCount=s.exercises.length; const sessVol=s.exercises.reduce((acc,ex)=>{const m=String(ex.sets||'').match(/(\d+)/); const n=m?Number(m[1]):1; return acc+n*(PESO_TECNICA[ex.tech]||1);},0); return '<div class="sectionhead '+s.cls+'" data-id="'+s.id+'"><div class="shey">'+s.eyebrow+'</div><div class="sht">'+s.title+'</div><div class="shr">'+s.summary+'</div><div class="vol-badge">'+exCount+' exercícios · '+sessVol.toFixed(1)+' séries equiv.</div></div><div class="sessionnote"><p>'+s.note[0]+'</p>'+(s.note[1]?'<p>'+s.note[1]+'</p>':'')+'</div>'+renderTimerBox(key)+'<div class="elist">'+s.exercises.map((ex,i)=>exerciseHtml(key,ex,i)).join('')+'<div class="finishwrap"><button class="finishbtn" type="button" data-sk="'+key+'" onclick="finishSession(this.dataset.sk)">Finalizar sessão</button></div></div>'; }
+  function sessionDone(key){ return SESSIONS[key].exercises.every(ex=>getLog(key,ex.key).done); }
+  function completedExercises(){ let done=0,total=0; Object.keys(SESSIONS).forEach(k=>SESSIONS[k].exercises.forEach(ex=>{total++; if(getLog(k,ex.key).done) done++;})); return {done,total}; }
+
+  function renderAll(){
+    const navItems=[['inicio','Início'],...Object.keys(SESSIONS).map(k=>[k,SESSIONS[k].tab]),['coach','Coach'],['tecnicas','Técnicas'],['historico','Histórico']];
+    document.getElementById('nav').innerHTML=navItems.map(([id,label],i)=>'<button class="'+(i===0?'active':'')+'" data-target="'+id+'">'+label+'</button>').join('');
+    document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.target)));
+
+    document.getElementById('inicio').innerHTML='<div class="hero"><div class="eyebrow">Team RHG · ficha offline</div><div class="title">'+_ATHLETE+'</div><div class="subtitle">'+_SUBTITLE+'</div><div class="tags" style="margin-bottom:16px">'+_TAGS+'</div><div class="weekrow">'+_WEEKROW+'</div></div><div class="note">'+_NOTE+'</div>';
+    document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.open)));
+
+    Object.keys(SESSIONS).forEach(k=>{ document.getElementById(k).innerHTML=sectionHtml(k); });
+
+    const comp=completedExercises(), pct=comp.total?Math.round(comp.done/comp.total*100):0, ds=Object.keys(SESSIONS).filter(sessionDone).length, ts=Object.keys(SESSIONS).length;
+    const volRows = VOL_AUTO.length ? VOL_AUTO : VOL_MANUAL;
+    document.getElementById('coach').innerHTML='<div class="stats"><div class="stitle">Painel do coach</div><div class="statsrow"><div class="stat"><div class="snum">'+ds+'/'+ts+'</div><div class="slab">sessões concluídas</div></div><div class="stat"><div class="snum">'+comp.done+'/'+comp.total+'</div><div class="slab">exercícios concluídos</div></div><div class="stat"><div class="snum">'+pct+'%</div><div class="slab">progresso semanal</div></div></div></div><div class="stats" style="margin-top:10px"><div class="stitle">Volume semanal (ponderado por técnica)</div>'+volRows.map(v=>'<div class="vr"><div>'+v[0]+'</div><div class="vnum">'+v[1]+'</div></div>').join('')+'</div>'+(VOL_MANUAL.length?'<div class="stats" style="margin-top:10px"><div class="stitle">Referência manual do coach</div>'+VOL_MANUAL.map(v=>'<div class="vr"><div>'+v[0]+'</div><div class="vnum">'+v[1]+'</div></div>').join('')+'</div>':'');
+
+    document.getElementById('tecnicas').innerHTML='<div class="tech"><div class="stitle">Técnicas de treino</div></div>'+TECHS.map(t=>'<div class="tech techcard" data-tech-card style="margin-top:10px"><div class="techname"><span>'+t.name+'</span><div style="display:flex;gap:8px;align-items:center"><span class="pill '+t.cls+'">'+t.name+'</span><span class="tech-mul">'+t.mul+'</span></div></div><div class="techdesc">'+t.desc+'</div><div class="techtip">Clique para entender melhor</div><div class="techmore"><div class="techdesc">'+t.more+'</div></div></div>').join('');
+    document.querySelectorAll('[data-tech-card]').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('open')));
+
+    document.getElementById('historico').innerHTML='<div class="stats"><div class="stitle">Histórico de treinos</div><p style="font-size:12px;color:var(--t2);margin-top:6px">O histórico aparece após finalizar sessões e registrar cargas.</p></div>';
+
+    document.querySelectorAll('input[data-s],textarea[data-s]').forEach(el=>{
+      el.addEventListener('input',()=>{ const s=el.dataset.s,e=el.dataset.e,k=el.dataset.k; const log=getLog(s,e); if(el.type==='checkbox') log[k]=el.checked; else log[k]=el.value; if(k.includes('set')&&k.includes('_done')){ const sc=setCountFromExercise(SESSIONS[s].exercises.find(ex=>ex.key===e)); log.done=areAllSetsChecked(log,sc); } saveState(true); });
+    });
+    document.querySelectorAll('input[type="checkbox"][data-s]').forEach(el=>{
+      el.addEventListener('change',()=>{ const s=el.dataset.s,e=el.dataset.e,k=el.dataset.k; const log=getLog(s,e); log[k]=el.checked; if(k==='done'||k.includes('_done')){ if(!k.includes('_done')) log.done=el.checked; } saveState(true); renderAll(); });
+    });
+    document.querySelectorAll('[data-timer-start]').forEach(b=>b.addEventListener('click',()=>startSessionTimer(b.dataset.timerStart)));
+    document.querySelectorAll('[data-timer-pause]').forEach(b=>b.addEventListener('click',()=>pauseSessionTimer(b.dataset.timerPause)));
+    document.querySelectorAll('[data-timer-reset]').forEach(b=>b.addEventListener('click',()=>resetSessionTimer(b.dataset.timerReset)));
+  }
+
+  function showSection(id,save=true){ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active')); document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active')); const sec=document.getElementById(id); if(sec) sec.classList.add('active'); const btn=document.querySelector('.nav button[data-target="'+id+'"]'); if(btn) btn.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); if(save) saveState(true); }
+
+  function pushHistory(sk,exKey){ const log=getLog(sk,exKey); const ex=SESSIONS[sk].exercises.find(item=>item.key===exKey); const sc=ex?setCountFromExercise(ex):1; const eLoad=ex?currentLoadValue(ex,log):(log.load||''); const eReps=totalPerformedReps(log,sc); const eRir=averagePerformedRir(log,sc); if(!eLoad&&!eReps&&!eRir&&!log.notes) return; log.load=eLoad||''; log.reps=eReps||''; log.rir=eRir||''; log.history||=[]; const entry={date:new Date().toLocaleDateString('pt-BR'),load:eLoad||'',reps:eReps||'',rir:eRir||'',effort:log.effort||'',notes:log.notes||'',set1_load:log.set1_load||'',set1_reps:log.set1_reps||'',set1_rir:log.set1_rir||'',set2_load:log.set2_load||'',set2_reps:log.set2_reps||'',set2_rir:log.set2_rir||'',set3_load:log.set3_load||'',set3_reps:log.set3_reps||'',set3_rir:log.set3_rir||'',set4_load:log.set4_load||'',set4_reps:log.set4_reps||'',set4_rir:log.set4_rir||''}; const first=log.history[0]; if(first&&sameEntry(entry,first)) return; log.history.unshift(entry); log.history=log.history.slice(0,5); }
+
+  function finishSession(sk){ const session=SESSIONS[sk]; if(!session) return; session.exercises.forEach(ex=>pushHistory(sk,ex.key)); const t=getTimer(sk); t.lastFinishedMs=currentElapsedMs(sk); t.elapsedMs=0; t.startedAt=null; t.isRunning=false; session.exercises.forEach(ex=>{const log=getLog(sk,ex.key); log.done=false; for(let i=1;i<=4;i++) log['set'+i+'_done']=false;}); saveState(true); renderAll(); const overlay=document.getElementById('finishOverlay'); if(overlay){overlay.classList.add('show'); setTimeout(()=>{overlay.classList.remove('show'); showSection('inicio',false);},1100);} showToast('Sessão finalizada ✅ · '+formatTimer(t.lastFinishedMs)); }
+
+  function buildSummary(){ const parts=['Resumo do treino — '+APP.athlete,'Semana: '+APP.week,'']; Object.entries(SESSIONS).forEach(([k,s])=>{ parts.push(s.title); s.exercises.forEach(ex=>{ const log=getLog(k,ex.key); const sc=setCountFromExercise(ex); const setsTxt=Array.from({length:sc},(_,i)=>i+1).map(n=>'S'+n+': '+(log['set'+n+'_load']||'-')+'kg/'+(log['set'+n+'_reps']||'-')+' reps/RIR '+(log['set'+n+'_rir']||'-')).join(' | '); if(log.load||log.reps||log.notes||log.done) parts.push('- '+ex.name+': '+setsTxt+' | '+(log.done?'concluído':'pendente')+(log.notes?' | '+log.notes:'')); }); parts.push(''); }); return parts.join('\n'); }
+
+  document.getElementById('reportBtn').onclick=async()=>{ try{ await navigator.clipboard.writeText(buildSummary()); showToast('Resumo copiado.'); }catch(e){ showToast('Não deu para copiar automaticamente.'); } };
+
+  loadState();
+  renderAll();
+  clearInterval(window._sessionTimerInterval);
+  window._sessionTimerInterval=setInterval(updateTimerUI,1000);
+</script>
+</body>
+</html>
